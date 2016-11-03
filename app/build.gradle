@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "24.0.3"
+    defaultConfig {
+        applicationId "banrisul.ibm.com.banrisulmobileapp"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BLUEMIX_ROUTE", '\"http://imfpush.ng.bluemix.net\"'
+            buildConfigField "String", "BLUEMIX_AppGUID", '\"e75f3982-344e-400f-85fb-ef13f4948142\"'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+    // Google
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.google.android.gms:play-services-location:9.6.1'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.google.android.gms:play-services-wearable:+'
+    compile 'com.google.android.gms:play-services-maps:+'
+    compile 'com.google.android.gms:play-services-location:+'
+    compile 'com.google.android.gms:play-services-gcm:+'
+    compile 'com.google.android.gms:play-services-plus:+'
+    compile 'com.google.android.gms:play-services-appindexing:+'
+
+    // API
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+
+
+    // Blue Mix Push
+    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
+            name: 'push',
+            version: '2.+',
+            ext: 'aar',
+            transitive: true
+
+    compile 'com.ibm.mobile.services:ibmdata:+'
+    compile 'com.ibm.mobile.services:ibmbluemix:+'
+    compile 'com.ibm.mobile.services:ibmfilesync:+'
+    compile 'com.ibm.mobile.services:ibmpush:+'
+    compile 'com.ibm.mobile.services:ibmcloudcode:+'
+    compile 'com.ibm.mobilefirstplatform.clientsdk.android:core:1.+@aar'
+
+
+
+
+    testCompile 'junit:junit:4.12'
+
+}
